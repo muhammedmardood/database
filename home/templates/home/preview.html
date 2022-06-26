@@ -1,6 +1,13 @@
 {% extends 'home/base.html' %}
 {% block content %}
-<legend>Preview {{pdf.name}}</legend><hr>
-<iframe src="{{ pdf.pdf.url }}" width="100%" height="600px"></iframe>
+<legend>Preview {{pdf.name}}</legend>
+<hr>
+<iframe src="https://docs.google.com/gview?url=https://mardood123.pythonanywhere.com{{ pdf.pdf.url }}&embedded=true"
+    width="100%" height="600px"></iframe>
+<form action="{% url 'delete' pdf.pk %}" method="post">
+    {% csrf_token %}
+    <a href='{% url "edit" pdf.pk %}' class="btn btn-primary btn-sm">Edit</a>
+    <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
+</form>
 <footer>Uploaded by: {{pdf.uploader}}</footer>
 {% endblock %}

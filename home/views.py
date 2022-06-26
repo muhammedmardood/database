@@ -1,13 +1,15 @@
 from django.shortcuts import redirect, render
 from .models import Pdf
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
+
 
 def delete(request, pk):
     if request.method == 'POST':
         pdf = Pdf.objects.get(pk=pk)
         pdf.delete()
     return redirect("home")
+
 
 def preview(request, pk):
     pdf = Pdf.objects.get(pk=pk)
@@ -16,6 +18,7 @@ def preview(request, pk):
         'pdf': pdf,
     }
     return render(request, 'home/preview.html', context)
+
 
 class BookListView(ListView):
     model = Pdf
@@ -28,11 +31,18 @@ class BookListView(ListView):
         if query:
             object_list = self.model.objects.filter(name__icontains=query)
         else:
-             object_list = self.model.objects.all()
+            object_list = self.model.objects.all()
         return object_list
 
+
 class UploadPdf(CreateView):
-    model= Pdf
-    fields = ("name" ,"uploader", "pdf")
+    model = Pdf
+    fields = ("name", "uploader", "pdf")
     success_url = reverse_lazy("home")
-    template_name = "home/upload_book.html"
+    template_name = "home/upload.html"
+
+
+class UpdatePdf(UpdateView):
+    model = Pdf
+    fields = ("name", "uploader", "pdf")
+    template_name = "home/update.html"
