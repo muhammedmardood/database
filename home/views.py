@@ -46,3 +46,6 @@ class UpdatePdf(UpdateView):
     model = Pdf
     fields = ("name", "uploader", "pdf")
     template_name = "home/update.html"
+
+    def get_success_url(self):
+        return reverse_lazy("home")
