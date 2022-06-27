@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-k3rmhhcqxvra(n7^!83^^3$%0-w9e1$imo)7bjpb^(gaw)16z)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['muhammeddb.pythonanywhere.com']
 
 
 # Application definition
@@ -113,9 +113,9 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'staticfiles/')
 ]
 X_FRAME_OPTIONS = 'ALLOWALL'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "/media")
-STATIC_ROOT = os.path.join(BASE_DIR, "/staticfiles")
+MEDIA_ROOT = BASE_DIR / 'media/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
