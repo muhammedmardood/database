@@ -29,9 +29,9 @@ class BookListView(ListView):
     def get_queryset(self):
         query = self.request.GET.get('q')
         if query:
-            object_list = self.model.objects.filter(name__icontains=query)
+            object_list = self.model.objects.order_by('-id').filter(name__icontains=query)
         else:
-            object_list = self.model.objects.all()
+            object_list = self.model.objects.all().order_by('-id')
         return object_list
 
 
